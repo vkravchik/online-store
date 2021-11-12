@@ -17,13 +17,15 @@ import { RoutingModule } from './routing/routing.module';
 import { HomeComponent } from './home/home.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { CartComponent } from './cart/cart.component';
+import { PricePipe } from './shared/price/price.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ItemCardComponent,
-    CartComponent
+    CartComponent,
+    PricePipe
   ],
   imports: [
     BrowserModule,

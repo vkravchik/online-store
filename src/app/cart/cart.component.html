@@ -1,15 +1,15 @@
 <div fxLayout="row wrap" fxLayoutGap="16px grid">
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let cartItem of cartList; trackBy: cartIdentifier">
     <app-item-card [item]="cartItem" [isCartItem]="true">
-      <div class="info-block">
+      <div  fxLayout="column">
         <div>
-          {{cartItem.price}}
+          {{cartItem.price * cartItem.purchaseQuantity | price}}
         </div>
-        <div>
-          <button mat-icon-button (click)="removeItemFromCart(cartItem)" [disabled]="!cartItem.countToBuy">
+        <div fxLayoutAlign="end center">
+          <button mat-icon-button (click)="removeItemFromCart(cartItem)" [disabled]="!cartItem.purchaseQuantity">
             <mat-icon>remove</mat-icon>
           </button>
-          {{cartItem.countToBuy}}
+          {{cartItem.purchaseQuantity}}
           <button mat-icon-button (click)="addItemToCart(cartItem)" [disabled]="!cartItem.availableCount">
             <mat-icon>add</mat-icon>
           </button>

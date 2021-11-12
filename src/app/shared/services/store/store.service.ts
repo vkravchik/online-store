@@ -9,7 +9,7 @@ export interface Item {
   imgUrl: string;
   price: number;
   availableCount: number;
-  countToBuy: number;
+  purchaseQuantity: number;
 }
 
 @Injectable({
@@ -27,7 +27,7 @@ export class StoreService {
       imgUrl: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-family-select-2021?wid=940&hei=1112&fmt=jpeg&qlt=80&.v=1617135051000',
       price: 1500,
       availableCount: 3,
-      countToBuy: 0
+      purchaseQuantity: 0
     },
     {
       id: '2',
@@ -35,7 +35,7 @@ export class StoreService {
       imgUrl: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1591634795000',
       price: 300,
       availableCount: 3,
-      countToBuy: 0
+      purchaseQuantity: 0
     },
     {
       id: '3',
@@ -43,7 +43,7 @@ export class StoreService {
       imgUrl: 'https://ilounge.ua/files/products/apple-macbook-pro-14-m1-pro-01_2.1000x.jpg',
       price: 2500,
       availableCount: 5,
-      countToBuy: 0
+      purchaseQuantity: 0
     },
     {
       id: '4',
@@ -51,7 +51,7 @@ export class StoreService {
       imgUrl: 'https://hotline.ua/img/tx/238/2384029215.jpg',
       price: 1500,
       availableCount: 0,
-      countToBuy: 0
+      purchaseQuantity: 0
     }
   ]
 
@@ -74,7 +74,7 @@ export class StoreService {
     }
 
     foundedItem.availableCount--;
-    foundedItem.countToBuy++;
+    foundedItem.purchaseQuantity++;
 
     if (!_.find(this.cartList, { id: foundedItem.id })) {
       this.cartList.push(foundedItem);
@@ -92,10 +92,10 @@ export class StoreService {
       return;
     }
 
-    foundedItem.countToBuy--;
+    foundedItem.purchaseQuantity--;
     foundedItem.availableCount++;
 
-    if (foundedItem.countToBuy === 0) {
+    if (foundedItem.purchaseQuantity === 0) {
       _.remove(this.cartList, { id: foundedItem.id });
     }
 
