@@ -100,6 +100,6 @@ export class StoreService {
     }
 
     this.messageSubject.next(CodeEnum.SUCCESS);
-    this.cartSubject.next(this.cartSubject.value + 1);
+    this.cartSubject.next(this.cartSubject.value - 1);
   }
 }
