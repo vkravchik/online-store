@@ -25,6 +25,14 @@ export class CartComponent implements OnInit, OnDestroy {
     return item.id;
   }
 
+  public addItemToCart(item: Item): void {
+    this.storeService.addItemToCart(item);
+  }
+
+  public removeItemFromCart(item: Item): void {
+    this.storeService.removeItemFromCart(item);
+  }
+
   private getCartList(): void {
     const subscription = this.storeService.getCartList().subscribe((cartList: Item[]) => {
       this.cartList = cartList;
@@ -32,5 +40,4 @@ export class CartComponent implements OnInit, OnDestroy {
 
     this.subscriptionHelperService.registerSubscription(subscription);
   }
-
 }

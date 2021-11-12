@@ -2,11 +2,13 @@
   <mat-card-header>
     <mat-card-title>{{item.name}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+  <div class="img-block">
+    <img mat-card-image [src]="item.imgUrl">
+  </div>
   <mat-card-content>
     <ng-content></ng-content>
   </mat-card-content>
-  <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+  <mat-card-actions fxLayout="row" fxLayoutAlign="end center" *ngIf="!isCartItem">
     <button [disabled]="!item.availableCount" mat-button color="primary" (click)="onBuyItem(item)">
       <mat-icon>add_shopping_cart</mat-icon>
       BUY

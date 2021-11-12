@@ -2,7 +2,7 @@
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of items; trackBy: itemsIdentifier">
     <app-item-card [item]="item">
       <div>
-        {{item.description}}
+        {{item.price}}
       </div>
       <div>
         {{item.availableCount}}

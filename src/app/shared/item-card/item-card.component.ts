@@ -10,10 +10,13 @@ export class ItemCardComponent implements OnInit {
   @Input() item: Item = {
     id: '',
     name: '',
-    description: '',
+    imgUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+    price: 0,
     availableCount: 0,
     countToBuy: 0
   };
+
+  @Input() isCartItem: boolean = false;
 
   constructor(private storeService: StoreService) { }
 

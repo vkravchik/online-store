@@ -1,13 +1,20 @@
-<div *ngFor="let cartItem of cartList; trackBy: cartIdentifier">
-  <app-item-card [item]="cartItem">
-    <div>
-      {{cartItem.description}}
-    </div>
-    <div>
-      {{cartItem.countToBuy}}
-      <button mat-icon-button class="example-icon" aria-label="">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  </app-item-card>
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let cartItem of cartList; trackBy: cartIdentifier">
+    <app-item-card [item]="cartItem" [isCartItem]="true">
+      <div class="info-block">
+        <div>
+          {{cartItem.price}}
+        </div>
+        <div>
+          <button mat-icon-button (click)="removeItemFromCart(cartItem)" [disabled]="!cartItem.countToBuy">
+            <mat-icon>remove</mat-icon>
+          </button>
+          {{cartItem.countToBuy}}
+          <button mat-icon-button (click)="addItemToCart(cartItem)" [disabled]="!cartItem.availableCount">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </app-item-card>
+  </div>
 </div>

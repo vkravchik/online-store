@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, groupBy, mergeMap, Observable, of, Subject, toArray } from 'rxjs';
 import * as _ from 'lodash';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { CodeEnum } from '../../enums/code.enum';
 
 export interface Item {
   id: string;
   name: string;
-  description: string;
+  imgUrl: string;
+  price: number;
   availableCount: number;
   countToBuy: number;
 }
@@ -22,29 +23,33 @@ export class StoreService {
   private itemList: Item[] = [
     {
       id: '1',
-      name: 'Name 1',
-      description: 'Description 1',
+      name: 'iPhone 13',
+      imgUrl: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-family-select-2021?wid=940&hei=1112&fmt=jpeg&qlt=80&.v=1617135051000',
+      price: 1500,
       availableCount: 3,
       countToBuy: 0
     },
     {
       id: '2',
-      name: 'Name 2',
-      description: 'Description 2',
+      name: 'Airpods Pro',
+      imgUrl: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1591634795000',
+      price: 300,
       availableCount: 3,
       countToBuy: 0
     },
     {
       id: '3',
-      name: 'Name 3',
-      description: 'Description 3',
+      name: 'MacBook Pro',
+      imgUrl: 'https://ilounge.ua/files/products/apple-macbook-pro-14-m1-pro-01_2.1000x.jpg',
+      price: 2500,
       availableCount: 5,
       countToBuy: 0
     },
     {
       id: '4',
-      name: 'Name 4',
-      description: 'Description 4',
+      name: 'iPad Pro',
+      imgUrl: 'https://hotline.ua/img/tx/238/2384029215.jpg',
+      price: 1500,
       availableCount: 0,
       countToBuy: 0
     }
@@ -73,6 +78,25 @@ export class StoreService {
 
     if (!_.find(this.cartList, { id: foundedItem.id })) {
       this.cartList.push(foundedItem);
+    }
+
+    this.messageSubject.next(CodeEnum.SUCCESS);
+    this.cartSubject.next(this.cartSubject.value + 1);
+  }
+
+  removeItemFromCart(item: Item): void {
+    const foundedItem = _.find(this.itemList, { id: item.id });
+
+    if (_.isUndefined(foundedItem)) {
+      this.messageSubject.next(CodeEnum.ITEM_NOT_FOUND);
+      return;
+    }
+
+    foundedItem.countToBuy--;
+    foundedItem.availableCount++;
+
+    if (foundedItem.countToBuy === 0) {
+      _.remove(this.cartList, { id: foundedItem.id });
     }
 
     this.messageSubject.next(CodeEnum.SUCCESS);

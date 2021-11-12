@@ -1,3 +1,19 @@
 .item-card {
   max-width: 400px;
+  min-height: 320px;
+}
+
+.info-block {
+  display: flex;
+}
+
+.img-block {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-height: 250px;
+  max-width: 260px;
 }
