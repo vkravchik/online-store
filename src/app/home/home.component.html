@@ -1,0 +1,12 @@
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of items; trackBy: itemsIdentifier">
+    <app-item-card [item]="item">
+      <div>
+        {{item.description}}
+      </div>
+      <div>
+        {{item.availableCount}}
+      </div>
+    </app-item-card>
+  </div>
+</div>

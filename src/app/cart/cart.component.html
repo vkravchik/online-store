@@ -1,0 +1,13 @@
+<div *ngFor="let cartItem of cartList; trackBy: cartIdentifier">
+  <app-item-card [item]="cartItem">
+    <div>
+      {{cartItem.description}}
+    </div>
+    <div>
+      {{cartItem.countToBuy}}
+      <button mat-icon-button class="example-icon" aria-label="">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </app-item-card>
+</div>
